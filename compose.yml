@@ -15,6 +15,19 @@ services:
     build: ./infra/mysql
     volumes:
       - db-store:/var/lib/mysql
+    ports:
+      - "33060:3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: example
 
 volumes:
   db-store:
+
+networks:
+  laravel:
+    driver: bridge
